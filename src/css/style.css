@@ -62,7 +62,19 @@ body {
     width: 60vw;
 }
 
-#shields {
+#shieldsGithub {
+    position:fixed;
+    right:500px;
+    bottom:50px;
+}
+
+#shieldsBabel {
+    position:fixed;
+    right:300px;
+    bottom:50px;
+}
+
+#shieldsWebpack {
     position:fixed;
     right:100px;
     bottom:50px;
