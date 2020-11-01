@@ -7,7 +7,7 @@ export class GameControl extends Listener {
 
     static init() { }
 
-    static  build(isReload = false) {
+    static async build(isReload = false) {
 
         const parent = super.$("GameControl")
         const backup = globalThis.waitTime
@@ -43,7 +43,7 @@ export class GameControl extends Listener {
         if (isReload) { globalThis.waitTime = backup }
     }
 
-    static  run() {
+    static async run() {
         const ans = globalThis.answer
         ans.forEach((_, i) => {
             setTimeout(() => {
@@ -55,7 +55,7 @@ export class GameControl extends Listener {
         })
     }
 
-    static  onClick(id) {
+    static async onClick(id) {
         let i = 0
         
         const icon = document.createElement("a")
@@ -95,7 +95,7 @@ export class GameControl extends Listener {
         }
     }
 
-    static  light(el, option) {
+    static async light(el, option) {
         el.style.border = option ? "0.3vw solid white" : null
     }
 
