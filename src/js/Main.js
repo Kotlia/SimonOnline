@@ -5,19 +5,17 @@
  * @license MIT
  */
 
-import { GameControl } from "./GameControl.js";
-import { SettingControl } from "./SettingControl.js";
-import { Traitable } from "./util/Traitable.js";
-import { VisualController } from "./VisualController.js";
+import { GameControl } from './GameControl.js';
+import { SettingControl } from './SettingControl.js';
+import { Traitable } from './util/Traitable.js';
+import { VisualController } from './VisualController.js';
 
 window.onload = () => {
-    Main.init()
-}
+    Main.init();
+};
 
 export class Main {
-
     static init() {
-
         /**
          * @see Traitable.js
          */
@@ -25,14 +23,14 @@ export class Main {
             isGameActive: true,
             answer: [],
             waitTime: 500,
-            rememberTime: 500
-        })
+            rememberTime: 500,
+        });
 
         /**
          * init
          */
-        new Array(GameControl, SettingControl, VisualController).forEach(it => it.init())
-
+        new Array(GameControl, SettingControl, VisualController).forEach((it) =>
+            it.init()
+        );
     }
-
 }
