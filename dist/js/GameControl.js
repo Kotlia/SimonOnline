@@ -27,10 +27,6 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -71,202 +67,122 @@ var GameControl = /*#__PURE__*/function (_Listener) {
     value: function init() {}
   }, {
     key: "build",
-    value: function () {
-      var _build = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var _this = this;
+    value: function build() {
+      var _this = this;
 
-        var isReload,
-            parent,
-            backup,
-            _args = arguments;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                isReload = _args.length > 0 && _args[0] !== undefined ? _args[0] : false;
-                parent = _get(_getPrototypeOf(GameControl), "$", this).call(this, "GameControl");
-                backup = globalThis.waitTime;
+      var isReload = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
-                if (isReload) {
-                  _toConsumableArray(parent.childNodes).filter(function (_) {
-                    return _.tagName == "A";
-                  }).forEach(function (_) {
-                    return _.remove();
-                  });
+      var parent = _get(_getPrototypeOf(GameControl), "$", this).call(this, "GameControl");
 
-                  globalThis.waitTime = 0;
-                }
+      var backup = globalThis.waitTime;
 
-                globalThis.answer = _Util.util.range((globalThis.world - 1) * 3 + globalThis.stage).map(_Util.util.randomLevel);
+      if (isReload) {
+        _toConsumableArray(parent.childNodes).filter(function (_) {
+          return _.tagName == "A";
+        }).forEach(function (_) {
+          return _.remove();
+        });
 
-                _Util.util.range(0, globalThis.world + 1).forEach(function (_, i) {
-                  setTimeout(function () {
-                    var child = document.createElement("a");
-                    child.className = "circle";
-                    child.style["background-color"] = _Lib.Lib.colorSet[i];
-                    child.id = i;
-                    child.addEventListener('click', function () {
-                      _this.onClick(i);
-                    }, false);
-                    parent.appendChild(child);
-
-                    if (i == world) {
-                      setTimeout(function () {
-                        _this.run();
-                      }, globalThis.waitTime * 2);
-                    }
-                  }, globalThis.waitTime * i);
-                });
-
-                if (isReload) {
-                  globalThis.waitTime = backup;
-                }
-
-              case 7:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-
-      function build() {
-        return _build.apply(this, arguments);
+        globalThis.waitTime = 0;
       }
 
-      return build;
-    }()
+      globalThis.answer = _Util.util.range((globalThis.world - 1) * 3 + globalThis.stage).map(_Util.util.randomLevel);
+
+      _Util.util.range(0, globalThis.world + 1).forEach(function (_, i) {
+        setTimeout(function () {
+          var child = document.createElement("a");
+          child.className = "circle";
+          child.style["background-color"] = _Lib.Lib.colorSet[i];
+          child.id = i;
+          child.addEventListener('click', function () {
+            _this.onClick(i);
+          }, false);
+          parent.appendChild(child);
+
+          if (i == world) {
+            setTimeout(function () {
+              _this.run();
+            }, globalThis.waitTime * 2);
+          }
+        }, globalThis.waitTime * i);
+      });
+
+      if (isReload) {
+        globalThis.waitTime = backup;
+      }
+    }
   }, {
     key: "run",
-    value: function () {
-      var _run = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-        var _this2 = this;
+    value: function run() {
+      var _this2 = this;
 
-        var ans;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                ans = globalThis.answer;
-                ans.forEach(function (_, i) {
-                  setTimeout(function () {
-                    _this2.light(_get(_getPrototypeOf(GameControl), "$", _this2).call(_this2, _), true);
+      var ans = globalThis.answer;
+      ans.forEach(function (_, i) {
+        setTimeout(function () {
+          _this2.light(_get(_getPrototypeOf(GameControl), "$", _this2).call(_this2, _), true);
 
-                    setTimeout(function () {
-                      _this2.light(_get(_getPrototypeOf(GameControl), "$", _this2).call(_this2, [_]), false);
-                    }, globalThis.rememberTime * 0.5);
-                  }, globalThis.rememberTime * i);
-                });
-
-              case 2:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      function run() {
-        return _run.apply(this, arguments);
-      }
-
-      return run;
-    }()
+          setTimeout(function () {
+            _this2.light(_get(_getPrototypeOf(GameControl), "$", _this2).call(_this2, [_]), false);
+          }, globalThis.rememberTime * 0.5);
+        }, globalThis.rememberTime * i);
+      });
+    }
   }, {
     key: "onClick",
-    value: function () {
-      var _onClick = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(id) {
-        var _this3 = this;
+    value: function onClick(id) {
+      var _this3 = this;
 
-        var i, icon;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                i = 0;
-                icon = document.createElement("a");
-                icon.style["background-color"] = _Lib.Lib.colorSet[id];
-                icon.className = "circle-icon";
+      var i = 0;
+      var icon = document.createElement("a");
+      icon.style["background-color"] = _Lib.Lib.colorSet[id];
+      icon.className = "circle-icon";
 
-                _get(_getPrototypeOf(GameControl), "$", this).call(this, "input").appendChild(icon);
+      _get(_getPrototypeOf(GameControl), "$", this).call(this, "input").appendChild(icon);
 
-                if (globalThis.answer[i] == id) {
-                  globalThis.answer.shift();
+      if (globalThis.answer[i] == id) {
+        globalThis.answer.shift();
 
-                  if (globalThis.answer.length == 0) {
-                    iziToast.show({
-                      title: 'Correct!',
-                      message: "That's the corrent sequence.",
-                      position: "topCenter",
-                      timeout: 1500,
-                      onClosed: function onClosed() {
-                        if (globalThis.stage < 3) {
-                          globalThis.stage++;
-                        } else {
-                          globalThis.stage = 0;
-                          globalThis.world++;
-                        }
+        if (globalThis.answer.length == 0) {
+          iziToast.show({
+            title: 'Correct!',
+            message: "That's the corrent sequence.",
+            position: "topCenter",
+            timeout: 1500,
+            onClosed: function onClosed() {
+              if (globalThis.stage < 3) {
+                globalThis.stage++;
+              } else {
+                globalThis.stage = 0;
+                globalThis.world++;
+              }
 
-                        _toConsumableArray(_get(_getPrototypeOf(GameControl), "$", _this3).call(_this3, "input").children).forEach(function (_) {
-                          return _.remove();
-                        });
+              _toConsumableArray(_get(_getPrototypeOf(GameControl), "$", _this3).call(_this3, "input").children).forEach(function (_) {
+                return _.remove();
+              });
 
-                        _get(_getPrototypeOf(GameControl), "$", _this3).call(_this3, "scoreboard").innerText = "Stage: ".concat(globalThis.world, "- Level:").concat(globalThis.stage);
+              _get(_getPrototypeOf(GameControl), "$", _this3).call(_this3, "scoreboard").innerText = "Stage: ".concat(globalThis.world, "- Level:").concat(globalThis.stage);
 
-                        _this3.build(true);
-                      }
-                    });
-                  }
-                } else {
-                  iziToast.show({
-                    title: 'Wrong!',
-                    message: "I'm sorry, you lost...\nClose ME to restart! ⇨",
-                    position: "topCenter",
-                    timeout: 1e10,
-                    onClosing: function onClosing() {
-                      location.reload();
-                    }
-                  });
-                }
-
-              case 6:
-              case "end":
-                return _context3.stop();
+              _this3.build(true);
             }
+          });
+        }
+      } else {
+        iziToast.show({
+          title: 'Wrong!',
+          message: "I'm sorry, you lost...\nClose ME to restart! ⇨",
+          position: "topCenter",
+          timeout: 1e10,
+          onClosing: function onClosing() {
+            location.reload();
           }
-        }, _callee3, this);
-      }));
-
-      function onClick(_x) {
-        return _onClick.apply(this, arguments);
+        });
       }
-
-      return onClick;
-    }()
+    }
   }, {
     key: "light",
-    value: function () {
-      var _light = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4(el, option) {
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                el.style.border = option ? "0.3vw solid white" : null;
-
-              case 1:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4);
-      }));
-
-      function light(_x2, _x3) {
-        return _light.apply(this, arguments);
-      }
-
-      return light;
-    }()
+    value: function light(el, option) {
+      el.style.border = option ? "0.3vw solid white" : null;
+    }
   }]);
 
   return GameControl;
