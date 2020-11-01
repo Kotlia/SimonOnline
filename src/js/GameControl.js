@@ -45,19 +45,25 @@ export class GameControl extends Listener {
 
     static run() {
         const ans = globalThis.answer
+        let timeout = [];
         ans.forEach((_, i) => {
-            setTimeout(() => {
-                this.light(super.$(_), true)
+            timeout.push(
                 setTimeout(() => {
-                    this.light(super.$([_]), false)
-                }, globalThis.rememberTime * 0.5)
-            }, globalThis.rememberTime * i);
+                    new Audio('../assets/click.mp3').play()
+                    if (!globalThis.isGameActive) { timeout.forEach(_ => clearTimeout(_)) }
+                    this.light(super.$(_), true)
+                    timeout.push(
+                        setTimeout(() => {
+                            this.light(super.$([_]), false)
+                        }, globalThis.rememberTime * 0.5)
+                    )
+                }, globalThis.rememberTime * i)
+            )
         })
     }
 
     static onClick(id) {
         let i = 0
-        
         const icon = document.createElement("a")
         icon.style["background-color"] = Lib.colorSet[id]
         icon.className = "circle-icon"
@@ -66,23 +72,36 @@ export class GameControl extends Listener {
         if (globalThis.answer[i] == id) {
             globalThis.answer.shift()
             if (globalThis.answer.length == 0) {
-                iziToast.show({
-                    title: 'Correct!',
-                    message: "That's the corrent sequence.",
-                    position: "topCenter",
-                    timeout: 1500,
-                    onClosed: () => {
-                        if (globalThis.stage < 3) {
-                            globalThis.stage++
-                        } else {
-                            globalThis.stage = 0
-                            globalThis.world++
+                if (globalThis.stage < 3) {
+                    new Audio('../assets/level_up.mp3').play()
+                    globalThis.stage++
+                    iziToast.show({
+                        title: 'Correct!',
+                        message: "That's the corrent sequence.",
+                        position: "topCenter",
+                        timeout: 1500,
+                        onClosed: () => {
+                            [...super.$("input").children].forEach(_ => _.remove())
+                            super.$("scoreboard").innerText = `Stage: ${globalThis.world}- Level:${globalThis.stage}`
+                            this.build(true)
                         }
-                        [...super.$("input").children].forEach(_ => _.remove())
-                        super.$("scoreboard").innerText = `Stage: ${globalThis.world}- Level:${globalThis.stage}`
-                        this.build(true)
-                    }
-                });
+                    });
+                } else {
+                    new Audio('../assets/stage_clear.mp3').play()
+                    globalThis.stage = 1
+                    globalThis.world++
+                    iziToast.show({
+                        title: 'Congrats!!',
+                        message: "Proceeding to the next stage...",
+                        position: "topCenter",
+                        timeout: 1500,
+                        onClosed: () => {
+                            [...super.$("input").children].forEach(_ => _.remove())
+                            super.$("scoreboard").innerText = `Stage: ${globalThis.world}- Level:${globalThis.stage}`
+                            this.build(true)
+                        }
+                    });
+                }
             }
         } else {
             iziToast.show({

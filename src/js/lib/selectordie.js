@@ -512,8 +512,13 @@
 
 
             listScroll: function ($sodList, $option) {
-                var $scrollList   = $sodList[0].getBoundingClientRect(), // getBoundingClientRect FTW!
+                var $scrollList   = $sodList[0].getBoundingClientRect(); // getBoundingClientRect FTW!
+                var $scrollOption;
+                try {
                     $scrollOption = $option[0].getBoundingClientRect();
+                } catch (error) {
+                    $scrollOption = 0
+                }
 
                 // Scroll list up and down
                 if ( $scrollList.top > $scrollOption.top ) {

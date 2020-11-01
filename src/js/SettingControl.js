@@ -8,6 +8,37 @@ export class SettingControl extends Listener {
 
     static init() {
 
+        if (localStorage.getItem("worldPrefix") == null) {
+            localStorage.setItem("worldPrefix", "Start from Stage:")
+        }
+
+        ["world", "stage", "difficulity"].forEach(_ => {
+
+            super.$(_).value = localStorage.getItem(_) == undefined 
+            ? super.$(_).children[0].innerHTML
+            : localStorage.getItem(_)
+
+            if (_ != "difficulity") {
+                super.$(_).onchange = () => {
+                    if (super.$("world").value > 1 || super.$("stage").value > 1) {
+                        localStorage.setItem("worldPrefix", "Resume from Stage:")
+                    } else {
+                        localStorage.setItem("worldPrefix", "Start from Stage:")
+                    }
+    
+                    new Traitable(localStorage).with({
+                        world: parseInt(super.$("world").value),
+                        stage: parseInt(super.$("stage").value),
+                        difficulity: super.$("difficulity").value
+                    })
+    
+                    location.reload()
+                }
+            }
+        })
+        super.$("world").dataset.prefix = localStorage.getItem("worldPrefix")
+
+
         super.$("StartButton").addEventListener('click', () => {
             const element = super.$("StartButton")
 
@@ -24,6 +55,7 @@ export class SettingControl extends Listener {
             new Traitable(globalThis).with({
                 world: parseInt(super.$("world").value),
                 stage: parseInt(super.$("stage").value),
+                isGameActive: true
             })
 
             super.$("selection").remove()
