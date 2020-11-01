@@ -1,6 +1,6 @@
 module.exports = {
     // メインとなるJavaScriptファイル（エントリーポイント）
-    entry: `./src/js/Main.js`,
+    entry: `./dist/Main.js`,
   
     // ファイルの出力設定
     output: {

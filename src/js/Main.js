@@ -7,7 +7,7 @@ window.onload = () => Main.init()
 
 export class Main {
 
-    static async init() {
+    static  init() {
 
         new Traitable(globalThis).with({
             isGameActive: false,
