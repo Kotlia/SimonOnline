@@ -1,3 +1,7 @@
+/**
+ * @abstract EventListener
+ */
+
 export class Listener {
 
     static $(id) {

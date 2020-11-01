@@ -478,7 +478,7 @@ var GameControl = /*#__PURE__*/function (_Listener) {
       var timeout = [];
       ans.forEach(function (_, i) {
         timeout.push(setTimeout(function () {
-          new Audio('.assets/click.mp3').play();
+          new Audio('./assets/click.mp3').play();
 
           if (!globalThis.isGameActive) {
             timeout.forEach(function (_) {
@@ -511,7 +511,7 @@ var GameControl = /*#__PURE__*/function (_Listener) {
 
         if (globalThis.answer.length == 0) {
           if (globalThis.stage < 3) {
-            new Audio('.assets/level_up.mp3').play();
+            new Audio('./assets/level_up.mp3').play();
             globalThis.stage++;
             iziToast.show({
               title: 'Correct!',
@@ -529,7 +529,7 @@ var GameControl = /*#__PURE__*/function (_Listener) {
               }
             });
           } else {
-            new Audio('.assets/stage_clear.mp3').play();
+            new Audio('./assets/stage_clear.mp3').play();
             globalThis.stage = 1;
             globalThis.world++;
             iziToast.show({

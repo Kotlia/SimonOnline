@@ -1,3 +1,10 @@
+/**
+ * Implementation of Scala 'Trait' on JavaScript
+ * 
+ * @author Shun Ueda
+ * @license MIT
+ */
+
 export class Traitable extends Object {
 
     constructor(obj) {

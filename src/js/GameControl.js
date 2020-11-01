@@ -7,6 +7,9 @@ export class GameControl extends Listener {
 
     static init() { }
 
+    /**
+     * Build button
+     */
     static build(isReload = false) {
 
         const parent = super.$("GameControl")
@@ -43,6 +46,9 @@ export class GameControl extends Listener {
         if (isReload) { globalThis.waitTime = backup }
     }
 
+    /**
+     * Run the game
+     */
     static run() {
         const ans = globalThis.answer
         let timeout = [];
@@ -62,6 +68,9 @@ export class GameControl extends Listener {
         })
     }
 
+    /**
+     * Onclick eventlistener
+     */
     static onClick(id) {
         let i = 0
         const icon = document.createElement("a")

@@ -1,3 +1,10 @@
+/**
+ * SimonOnline: Project for AP JavaScript
+ * @name SimonOnline
+ * @author Shun Ueda
+ * @license MIT
+ */
+
 import { GameControl } from "./GameControl.js";
 import { SettingControl } from "./SettingControl.js";
 import { Traitable } from "./util/Traitable.js";
@@ -11,6 +18,9 @@ export class Main {
 
     static init() {
 
+        /**
+         * @see Traitable.js
+         */
         new Traitable(globalThis).with({
             isGameActive: true,
             answer: [],
@@ -18,6 +28,9 @@ export class Main {
             rememberTime: 500
         })
 
+        /**
+         * init
+         */
         new Array(GameControl, SettingControl, VisualController).forEach(it => it.init())
 
     }
