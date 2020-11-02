@@ -1,4 +1,6 @@
 # SimonOnline
 AP JavaScript project
 
-https://simon-online.web.app/
+- simononline.cf (www.simononline.cf)
+
+- https://simon-online.web.app/
